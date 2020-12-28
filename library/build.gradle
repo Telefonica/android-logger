@@ -1,24 +1,33 @@
-apply plugin: "kotlin-kapt"
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven-publish'
 
 android {
-    flavorDimensions "loggerMode"
+    compileSdkVersion 30
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+    }
+
+    flavorDimensions "mode"
     productFlavors {
         enabled {
-            dimension "loggerMode"
+            dimension "mode"
         }
         noop {
-            dimension "loggerMode"
+            dimension "mode"
         }
     }
 }
 
 dependencies {
-    implementation libs.kotlin_stdlib
-    implementation libs.design
-    enabledImplementation libs.lifecycle
-    enabledImplementation libs.xlog
-    enabledImplementation libs.okio
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "com.google.android.material:material:$support_version"
+    enabledImplementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    enabledImplementation "com.elvishew:xlog:1.3.0"
+    enabledImplementation "com.squareup.okio:okio:1.8.0"
 
-    testImplementation libs.junit
-    testImplementation libs.mockito
+    testImplementation 'junit:junit:4.13'
 }

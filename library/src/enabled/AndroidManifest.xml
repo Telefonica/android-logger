@@ -4,7 +4,7 @@
 		>
 	<application>
 		<activity
-				android:name=".ui.AppLoggerActivity"
+				android:name="com.telefonica.androidlogger.ui.AppLoggerActivity"
 				android:label="@string/toolbar_title"
 				android:exported="false"
 				>
@@ -20,7 +20,7 @@
 		</activity>
 
 		<provider
-				android:name="com.tuenti.applogger.io.provider.AppLoggerFileProvider"
+				android:name="com.telefonica.androidlogger.io.provider.AppLoggerFileProvider"
 				android:authorities="${applicationId}.providers.AppLoggerFileProvider"
 				android:exported="false"
 				android:grantUriPermissions="true"

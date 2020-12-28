@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="toolbar_title">Logs</string>
+
+	<string name="action_search">Search</string>
+	<string name="action_filter">Filter</string>
+	<string name="action_share_visible">Share Visible Logs</string>
+	<string name="action_share_all">Share All Logs</string>
+	<string name="action_scroll">Scroll To Bottom</string>
+
+	<string name="search_hint">Type filter …</string>
+
+	<string name="copy_clipboard_label">Log Entry</string>
+	<string name="copy_clipboard_success">Log copied to clipboard!</string>
+
+	<string name="share_all_logs_failure">Something went wrong retrieving persisted logs</string>
+
+	<string name="log_level_filter_message">Minimum Log Level</string>
+	<string name="categories_filter_message">Categories</string>
+</resources>

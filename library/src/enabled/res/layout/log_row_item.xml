@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:background="?android:windowBackground"
+		android:layout_height="wrap_content">
+
+	<LinearLayout
+			android:id="@+id/container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?selectableItemBackground"
+			android:clickable="true"
+			android:focusable="true"
+			android:orientation="horizontal"
+			android:padding="4dp">
+
+		<View
+				android:id="@+id/indicator"
+				android:layout_width="4dp"
+				android:layout_height="match_parent"
+				android:layout_marginStart="2dp"
+				android:layout_marginEnd="2dp"/>
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginStart="4dp"
+				android:layout_marginEnd="4dp"
+				android:orientation="vertical">
+
+			<TextView
+					android:id="@+id/header"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="sans-serif-medium"
+					android:layout_marginBottom="4dp"
+					android:textSize="12sp" />
+
+			<TextView
+					android:id="@+id/message"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:fontFamily="monospace"
+					android:ellipsize="end"
+					android:textSize="12sp" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</FrameLayout>

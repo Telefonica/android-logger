@@ -1,0 +1,24 @@
+apply plugin: "kotlin-kapt"
+
+android {
+    flavorDimensions "loggerMode"
+    productFlavors {
+        enabled {
+            dimension "loggerMode"
+        }
+        noop {
+            dimension "loggerMode"
+        }
+    }
+}
+
+dependencies {
+    implementation libs.kotlin_stdlib
+    implementation libs.design
+    enabledImplementation libs.lifecycle
+    enabledImplementation libs.xlog
+    enabledImplementation libs.okio
+
+    testImplementation libs.junit
+    testImplementation libs.mockito
+}

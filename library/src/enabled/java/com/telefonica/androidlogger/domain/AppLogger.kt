@@ -28,12 +28,12 @@ fun log(@LogPriority priority: Int, tag: String, message: String? = null, throwa
     appLoggerBLInstance?.log(priority, tag, message ?: "", throwable)
 }
 
-fun getLogs(): LiveData<List<LogEntry>> =
+internal fun getLogs(): LiveData<List<LogEntry>> =
     appLoggerBLInstance?.getLogs() ?: MutableLiveData<List<LogEntry>>().apply { value = emptyList() }
 
-fun getCategories(): List<LogCategory> =
+internal fun getCategories(): List<LogCategory> =
     appLoggerBLInstance?.categories ?: emptyList()
 
-fun getPersistedLogs(callback: TaskCallback<Uri>) {
+internal fun getPersistedLogs(callback: TaskCallback<Uri>) {
     appLoggerBLInstance?.getPersistedLogs(callback)
 }

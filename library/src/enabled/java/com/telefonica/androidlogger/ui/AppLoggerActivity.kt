@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-import com.tuenti.applogger.R
+import com.telefonica.androidlogger.R
 import com.telefonica.androidlogger.ui.adapter.LogListAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -242,7 +242,7 @@ class AppLoggerActivity : AppCompatActivity() {
             .let { it as Chip }
             .let {
                 @ColorInt val chipUncheckedBackgroundColor: Int = this@AppLoggerActivity.getThemeColor(R.attr.colorPrimary)
-                @ColorInt val chipTextColor: Int = this@AppLoggerActivity.getThemeColor(android.R.attr.textColorPrimaryInverse)
+                @ColorInt val chipTextColor: Int = this@AppLoggerActivity.getThemeColor(R.attr.colorOnPrimary)
                 val states = arrayOf(
                     intArrayOf(android.R.attr.state_checked),
                     intArrayOf(-android.R.attr.state_checked)

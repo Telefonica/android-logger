@@ -1,12 +1,13 @@
 <manifest
 		xmlns:android="http://schemas.android.com/apk/res/android"
-		package="com.tuenti.applogger"
+		package="com.telefonica.androidlogger"
 		>
 	<application>
 		<activity
-				android:name="com.telefonica.androidlogger.ui.AppLoggerActivity"
+				android:name=".ui.AppLoggerActivity"
 				android:label="@string/toolbar_title"
 				android:exported="false"
+				android:theme="@style/Theme.AndroidLogger"
 				>
 
 			<meta-data
@@ -20,7 +21,7 @@
 		</activity>
 
 		<provider
-				android:name="com.telefonica.androidlogger.io.provider.AppLoggerFileProvider"
+				android:name=".io.provider.AppLoggerFileProvider"
 				android:authorities="${applicationId}.providers.AppLoggerFileProvider"
 				android:exported="false"
 				android:grantUriPermissions="true"

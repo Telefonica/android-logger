@@ -3,7 +3,7 @@ package com.telefonica.androidlogger.ui.holder
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.tuenti.applogger.R
+import com.telefonica.androidlogger.R
 
 internal class LogListItemHolder(view: View) : RecyclerView.ViewHolder(view) {
     val container: View = view.findViewById(R.id.container)

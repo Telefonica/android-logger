@@ -146,10 +146,10 @@ internal enum class LogPriorityViewModel(
     val displayName: String,
     @ColorInt val color: Int
 ) {
-    VERBOSE("Verb", Color.parseColor("#2A2A3C")),
-    DEBUG("Debug", Color.parseColor("#2A2A3C")),
-    INFO("Info", Color.parseColor("#2A2A3C")),
-    WARN("Warn", Color.parseColor("#F1D302")),
-    ERROR("Err", Color.parseColor("#ED1C24")),
-    ASSERT("Wtf", Color.parseColor("#FF000C"))
+    VERBOSE("Verbose", Color.parseColor("#6C757D")),
+    DEBUG("Debug", Color.parseColor("#000000")),
+    INFO("Info", Color.parseColor("#007BFF")),
+    WARN("Warn", Color.parseColor("#FFC107")),
+    ERROR("Error", Color.parseColor("#DC3545")),
+    ASSERT("Assert", Color.parseColor("#E83E8C"))
 }

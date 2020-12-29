@@ -11,13 +11,13 @@ android {
         targetSdkVersion 30
     }
 
-    flavorDimensions "mode"
+    flavorDimensions "loggerMode"
     productFlavors {
         enabled {
-            dimension "mode"
+            dimension "loggerMode"
         }
         noop {
-            dimension "mode"
+            dimension "loggerMode"
         }
     }
 }

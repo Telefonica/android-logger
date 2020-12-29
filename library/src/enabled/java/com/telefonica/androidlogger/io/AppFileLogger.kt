@@ -2,6 +2,7 @@ package com.telefonica.androidlogger.io
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.core.content.FileProvider
 import com.elvishew.xlog.XLog
 import com.elvishew.xlog.flattener.ClassicFlattener
@@ -19,6 +20,7 @@ import java.io.FileInputStream
 import java.io.InputStream
 import java.io.SequenceInputStream
 import java.util.*
+import kotlin.math.min
 
 internal open class AppFileLogger(
     private val appContext: Context,
@@ -38,7 +40,8 @@ internal open class AppFileLogger(
     }
 
     open fun log(@LogPriority priority: Int, tag: String, message: String) {
-        logPrinter?.println(priority, tag, message)
+        /* File logger does not support ASSERT priority logs */
+        logPrinter?.println(min(priority, Log.ERROR), tag, message)
     }
 
     open fun getReport(callback: TaskCallback<Uri>) =

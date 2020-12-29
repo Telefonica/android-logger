@@ -5,7 +5,7 @@
 	<string name="action_search">Search</string>
 	<string name="action_filter">Filter</string>
 	<string name="action_share_visible">Share Visible Logs</string>
-	<string name="action_share_all">Share All Logs</string>
+	<string name="action_share_all">Share All Persisted Logs</string>
 	<string name="action_scroll">Scroll To Bottom</string>
 
 	<string name="search_hint">Type filter …</string>

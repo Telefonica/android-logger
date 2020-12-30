@@ -12,7 +12,8 @@ import java.util.concurrent.Executors
 
 internal var appLoggerBLInstance: AppLoggerBL? = null
 
-fun initAppLogger(context: Context, logCategories: List<LogCategory>) {
+@JvmOverloads
+fun initAppLogger(context: Context, logCategories: List<LogCategory> = emptyList()) {
     appLoggerBLInstance = AppLoggerBL(
         fileLogger = AppFileLogger(
             appContext = context,

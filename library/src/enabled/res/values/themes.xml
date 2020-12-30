@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.AndroidLogger" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">#FF3C3F41</item>
         <item name="colorPrimaryVariant">#FF313335</item>

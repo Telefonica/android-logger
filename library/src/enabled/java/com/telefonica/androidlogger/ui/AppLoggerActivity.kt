@@ -318,6 +318,7 @@ class AppLoggerActivity : AppCompatActivity() {
 
 private const val EXTRA_CATEGORIES_NAMES = "extra_categories_names"
 
-fun getLaunchIntent(context: Context, categories: List<LogCategory>): Intent? =
+@JvmOverloads
+fun getLaunchIntent(context: Context, categories: List<LogCategory> = emptyList()): Intent? =
     Intent(context, AppLoggerActivity::class.java)
         .putExtra(EXTRA_CATEGORIES_NAMES, ArrayList(categories.map { it.name }))

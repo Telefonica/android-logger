@@ -3,7 +3,8 @@ package com.telefonica.androidlogger.domain
 import android.content.Context
 
 @Suppress("UNUSED_PARAMETER")
-fun initAppLogger(context: Context, logCategories: List<LogCategory>) {
+@JvmOverloads
+fun initAppLogger(context: Context, logCategories: List<LogCategory> = emptyList()) {
 
 }
 

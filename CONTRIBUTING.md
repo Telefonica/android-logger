@@ -1,4 +1,4 @@
-# Contributing to mistica-android
+# Contributing to android-logger
 
 Thank you for your interest in this repository. You can contribute to this project in several ways:
 
@@ -13,7 +13,7 @@ If something is broken or not working as expected, let us know!
 
 :bug: [Open a Bug issue](https://github.com/Telefonica/android-logger/issues/new?assignees=&labels=bug&template=bug-report.md&title=)
 
-## Feature requests (no UI/UX changes)
+## Feature requests
 
 If you need additional functionality, support a new use case...
 

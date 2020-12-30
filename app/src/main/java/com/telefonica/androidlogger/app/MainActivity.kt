@@ -8,6 +8,7 @@ import com.telefonica.androidlogger.domain.LogPriority
 import com.telefonica.androidlogger.domain.log
 import com.telefonica.androidlogger.ui.getLaunchIntent
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,9 +35,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     @LogPriority
-    private fun getRandomLogPriority() = Random.nextInt(Log.ASSERT) + Log.VERBOSE
+    private fun getRandomLogPriority(): Int = Random.nextInt(Log.VERBOSE..Log.ASSERT)
 
-    private fun getRandomLogMessage() =
+    private fun getRandomLogMessage(): String =
         if (Random.nextBoolean()) "This is a short log message" else """
                     This is a long log message. A long log message can be expanded by clicking on
                     this long entry. In this way, you would be able to see whole log message. Also 
@@ -44,13 +45,13 @@ class MainActivity : AppCompatActivity() {
                     clipboard
                 """.trimIndent()
 
-    private fun getRandomLogTag() =
-        when (Random.nextInt(6)) {
-            0 -> LoggerConfig.LOGTAG_MY_FRAGMENT
-            1 -> LoggerConfig.LOGTAG_MY_ACTIVITY
-            2 -> LoggerConfig.LOGTAG_MY_SERVICE
-            3 -> LoggerConfig.LOGTAG_YOUR_STORAGE
-            4 -> LoggerConfig.LOGTAG_YOUR_API_CLIENT
+    private fun getRandomLogTag(): String =
+        when (Random.nextInt(1..6)) {
+            1 -> LoggerConfig.LOGTAG_MY_FRAGMENT
+            2 -> LoggerConfig.LOGTAG_MY_ACTIVITY
+            3 -> LoggerConfig.LOGTAG_MY_SERVICE
+            4 -> LoggerConfig.LOGTAG_YOUR_STORAGE
+            5 -> LoggerConfig.LOGTAG_YOUR_API_CLIENT
             else -> LoggerConfig.LOGTAG_THEIR_VIEW_MODEL
         }
 

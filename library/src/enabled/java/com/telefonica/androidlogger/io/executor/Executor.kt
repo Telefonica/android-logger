@@ -6,13 +6,14 @@ import java.util.concurrent.ExecutorService
 internal class Executor(
     private val executor: ExecutorService
 ) {
+    @Suppress("TooGenericExceptionCaught")
     fun <T> submit(task: () -> T, callback: TaskCallback<T>) {
         executor.execute {
             var result: T? = null
             try {
                 result = task.invoke()
-            } catch (throwable: Throwable) {
-                Log.e(LOGTAG, "Task Execution Failed", throwable)
+            } catch (e: Exception) {
+                Log.e(LOGTAG, "Task Execution Failed", e)
             }
             callback.func?.invoke(result)
         }

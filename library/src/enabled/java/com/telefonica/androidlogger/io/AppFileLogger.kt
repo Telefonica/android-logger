@@ -12,7 +12,11 @@ import com.elvishew.xlog.printer.file.naming.ChangelessFileNameGenerator
 import com.telefonica.androidlogger.domain.LogPriority
 import com.telefonica.androidlogger.io.executor.Executor
 import com.telefonica.androidlogger.io.executor.TaskCallback
-import okio.*
+import okio.BufferedSink
+import okio.Source
+import okio.buffer
+import okio.sink
+import okio.source
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream

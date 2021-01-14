@@ -12,13 +12,15 @@
         android:id="@+id/button_add_logs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add some logs!" />
+        android:text="Add some logs!"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/button_show_logger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Open Logger"
-        android:layout_marginTop="2dp" />
+        android:layout_marginTop="2dp"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

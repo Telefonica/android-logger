@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="all">
+        <ignore path="build" />
+    </issue>
+    <issue id="UnsafeExperimentalUsageError" severity="ignore" />
+    <issue id="UnsafeExperimentalUsageWarning" severity="ignore" />
+</lint>

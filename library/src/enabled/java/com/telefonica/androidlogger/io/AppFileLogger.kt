@@ -12,9 +12,7 @@ import com.elvishew.xlog.printer.file.naming.ChangelessFileNameGenerator
 import com.telefonica.androidlogger.domain.LogPriority
 import com.telefonica.androidlogger.io.executor.Executor
 import com.telefonica.androidlogger.io.executor.TaskCallback
-import okio.BufferedSink
-import okio.Okio
-import okio.Source
+import okio.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
@@ -64,8 +62,8 @@ internal open class AppFileLogger(
         var source: Source? = null
         var sink: BufferedSink? = null
         try {
-            source = Okio.source(buildLogReportStream())
-            sink = Okio.buffer(Okio.sink(outputFile))
+            source = buildLogReportStream().source()
+            sink = outputFile.sink().buffer()
             sink.writeAll(source)
         } finally {
             source?.close()

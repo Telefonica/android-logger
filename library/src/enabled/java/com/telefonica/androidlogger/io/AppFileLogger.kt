@@ -13,8 +13,10 @@ import com.telefonica.androidlogger.domain.LogPriority
 import com.telefonica.androidlogger.io.executor.Executor
 import com.telefonica.androidlogger.io.executor.TaskCallback
 import okio.BufferedSink
-import okio.Okio
 import okio.Source
+import okio.buffer
+import okio.sink
+import okio.source
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
@@ -46,19 +48,26 @@ internal open class AppFileLogger(
 
     open fun getReport(callback: TaskCallback<Uri>) =
         executor.submit(
-            task = { FileProvider.getUriForFile(appContext, appContext.packageName + FILE_PROVIDER_AUTHORITY_SUFFIX, buildLogReportFile()) },
+            task = {
+                FileProvider.getUriForFile(
+                    appContext,
+                    appContext.packageName + FILE_PROVIDER_AUTHORITY_SUFFIX,
+                    buildLogReportFile()
+                )
+            },
             callback = callback
         )
 
     private fun buildLogReportFile(): File {
         val outputDir = File(appContext.cacheDir, REPORTS_DIRECTORY).apply { mkdir() }
-        val outputFile = File.createTempFile(TEMPORAL_FILE_PREFIX, TEMPORAL_FILE_EXTENSION, outputDir)
+        val outputFile =
+            File.createTempFile(TEMPORAL_FILE_PREFIX, TEMPORAL_FILE_EXTENSION, outputDir)
 
         var source: Source? = null
         var sink: BufferedSink? = null
         try {
-            source = Okio.source(buildLogReportStream())
-            sink = Okio.buffer(Okio.sink(outputFile))
+            source = buildLogReportStream().source()
+            sink = outputFile.sink().buffer()
             sink.writeAll(source)
         } finally {
             source?.close()

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.telefonica.androidlogger.domain.LogCategory
 
-@Suppress("UNUSED_PARAMETER")
+@Suppress("UNUSED_PARAMETER", "FunctionOnlyReturningConstant")
 @JvmOverloads
 fun getLaunchIntent(context: Context, categories: List<LogCategory> = emptyList()): Intent? =
     null

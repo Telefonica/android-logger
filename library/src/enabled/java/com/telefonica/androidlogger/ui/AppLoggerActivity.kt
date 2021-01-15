@@ -39,6 +39,7 @@ import com.telefonica.androidlogger.io.executor.TaskCallback
 import com.telefonica.androidlogger.ui.viewmodel.AppLoggerViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogCategoryViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogPriorityViewModel
+import java.security.InvalidParameterException
 
 class AppLoggerActivity : AppCompatActivity() {
 
@@ -241,8 +242,10 @@ class AppLoggerActivity : AppCompatActivity() {
             .inflate(R.layout.log_category_chip, null)
             .let { it as Chip }
             .let {
-                @ColorInt val chipUncheckedBackgroundColor: Int = this@AppLoggerActivity.getThemeColor(R.attr.colorPrimary)
-                @ColorInt val chipTextColor: Int = this@AppLoggerActivity.getThemeColor(R.attr.colorOnPrimary)
+                @ColorInt val chipUncheckedBackgroundColor: Int =
+                    this@AppLoggerActivity.getThemeColor(R.attr.colorPrimary)
+                @ColorInt val chipTextColor: Int =
+                    this@AppLoggerActivity.getThemeColor(R.attr.colorOnPrimary)
                 val states = arrayOf(
                     intArrayOf(android.R.attr.state_checked),
                     intArrayOf(-android.R.attr.state_checked)
@@ -265,7 +268,7 @@ class AppLoggerActivity : AppCompatActivity() {
         val typedValue = TypedValue()
         theme.resolveAttribute(themeColor, typedValue, true)
         if (typedValue.data == TypedValue.DATA_NULL_UNDEFINED) {
-            throw RuntimeException("Theme color is not specified!")
+            throw InvalidParameterException("Theme color is not specified!")
         }
         return typedValue.data
     }

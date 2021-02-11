@@ -21,7 +21,7 @@ buildscript {
 allprojects {
 
     group = 'com.telefonica.androidlogger'
-    version = new File('version.txt').text
+    version = '0.0.2'
 
     repositories {
         google()

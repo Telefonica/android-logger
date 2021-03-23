@@ -117,7 +117,7 @@ internal class AppLoggerViewModel : ViewModel() {
         val isEmptyFiltersSelectionWithAllCategories =
             isEmptyCategoriesSelection && !showCategoriesLogsOnly
         return filter { entry ->
-            entry.category?.let {
+            entry.categories?.let {
                 (isEmptyCategoriesSelection && availableCategories.contains(it.toViewModel()))
                         || selectedCategories.contains(it.toViewModel())
             } ?: isEmptyFiltersSelectionWithAllCategories
@@ -131,12 +131,12 @@ internal class AppLoggerViewModel : ViewModel() {
 }
 
 internal data class LogEntryViewModel(
-    val id: Int,
-    val priority: LogPriorityViewModel,
-    val header: String,
-    val category: LogCategoryViewModel?,
-    val message: String,
-    val expanded: Boolean
+        val id: Int,
+        val priority: LogPriorityViewModel,
+        val header: String,
+        val categories: List<LogCategoryViewModel>?,
+        val message: String,
+        val expanded: Boolean
 )
 
 internal data class LogCategoryViewModel(

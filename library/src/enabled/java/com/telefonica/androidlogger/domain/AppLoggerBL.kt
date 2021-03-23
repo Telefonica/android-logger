@@ -12,25 +12,25 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 internal open class AppLoggerBL(
-    private val fileLogger: AppFileLogger,
-    private val consoleLogger: AppConsoleLogger
+        private val fileLogger: AppFileLogger,
+        private val consoleLogger: AppConsoleLogger
 ) {
     private val logs: LinkedList<LogEntry> = LinkedList()
     private val logsData: MutableLiveData<List<LogEntry>> = MutableLiveData()
 
     var categories: List<LogCategory> = emptyList()
         private set
-    private var tagsMap: Map<String, LogCategory> = emptyMap()
+    private var tagsMap: Map<String, List<LogCategory>> = emptyMap()
     private var idCounter: Int = 0
 
     open fun init(appContext: Context, logCategories: List<LogCategory>) {
         categories = logCategories
         tagsMap = categories
-            .flatMap { category ->
-                category.logTags.map { tag ->
-                    tag to category
-                }
-            }.toMap()
+                .flatMap { category ->
+                    category.logTags.map { tag ->
+                        tag to category
+                    }
+                }.groupBy({ it.first }, { it.second })
         logsData.value = emptyList()
         fileLogger.init()
     }
@@ -38,21 +38,21 @@ internal open class AppLoggerBL(
     open fun log(@LogPriority priority: Int, tag: String, message: String, throwable: Throwable?) {
         val messageToLog: String = getLogMessage(message, throwable)
         addLog(
-            LogEntry(
-                id = ++idCounter,
-                priority = priority,
-                tag = tag,
-                date = Date(),
-                category = tagsMap[tag],
-                message = messageToLog
-            )
+                LogEntry(
+                        id = ++idCounter,
+                        priority = priority,
+                        tag = tag,
+                        date = Date(),
+                        categories = tagsMap[tag],
+                        message = messageToLog
+                )
         )
         fileLogger.log(priority, tag, messageToLog)
         consoleLogger.log(priority, tag, messageToLog)
     }
 
     open fun getLogs(): LiveData<List<LogEntry>> =
-        logsData
+            logsData
 
     open fun getPersistedLogs(callback: TaskCallback<Uri>) {
         fileLogger.getReport(callback)

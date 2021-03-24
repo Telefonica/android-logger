@@ -54,7 +54,10 @@ internal class LogListAdapter(
             categories.isNullOrEmpty() -> holder.indicator.setBackgroundColor(Color.TRANSPARENT)
             categories.size == 1 -> holder.indicator.setBackgroundColor(categories[0].color)
             else -> {
-                val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, categories.map { it.color }.toIntArray())
+                val gradientDrawable = GradientDrawable(
+                        GradientDrawable.Orientation.TOP_BOTTOM,
+                        categories.map { it.color }.toIntArray()
+                )
                 holder.indicator.background = gradientDrawable
             }
         }

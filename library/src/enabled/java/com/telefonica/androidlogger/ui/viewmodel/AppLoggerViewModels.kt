@@ -118,8 +118,10 @@ internal class AppLoggerViewModel : ViewModel() {
                 isEmptyCategoriesSelection && !showCategoriesLogsOnly
         return filter { logEntry ->
             logEntry.categories?.let { logEntryCategories ->
-                val availableCategoriesMatching = logEntryCategories.filter { availableCategories.contains(it.toViewModel()) }
-                val selectedCategoriesMatching = logEntryCategories.filter { selectedCategories.contains(it.toViewModel()) }
+                val availableCategoriesMatching = logEntryCategories
+                        .filter { availableCategories.contains(it.toViewModel()) }
+                val selectedCategoriesMatching = logEntryCategories
+                        .filter { selectedCategories.contains(it.toViewModel()) }
                 (isEmptyCategoriesSelection && availableCategoriesMatching.isNotEmpty())
                         || selectedCategoriesMatching.isNotEmpty()
             } ?: isEmptyFiltersSelectionWithAllCategories

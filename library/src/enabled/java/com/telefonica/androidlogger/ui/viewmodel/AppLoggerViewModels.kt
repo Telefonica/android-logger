@@ -115,13 +115,26 @@ internal class AppLoggerViewModel : ViewModel() {
     private fun List<LogEntry>.filterBySelectedCategories(): List<LogEntry> {
         val isEmptyCategoriesSelection = selectedCategories.isEmpty()
         val isEmptyFiltersSelectionWithAllCategories =
-            isEmptyCategoriesSelection && !showCategoriesLogsOnly
-        return filter { entry ->
-            entry.categories?.let {
-                (isEmptyCategoriesSelection && availableCategories.contains(it.toViewModel()))
-                        || selectedCategories.contains(it.toViewModel())
+                isEmptyCategoriesSelection && !showCategoriesLogsOnly
+        return filter { logEntry ->
+            logEntry.categories?.let { logEntryCategories ->
+                val availableCategoriesMatching = logEntryCategories.filter { availableCategories.contains(it.toViewModel()) }
+                val selectedCategoriesMatching = logEntryCategories.filter { selectedCategories.contains(it.toViewModel()) }
+                (isEmptyCategoriesSelection && availableCategoriesMatching.isNotEmpty())
+                        || selectedCategoriesMatching.isNotEmpty()
             } ?: isEmptyFiltersSelectionWithAllCategories
+        }.map { getLogEntryWithFilteredCategories(it) }
+    }
+
+    private fun getLogEntryWithFilteredCategories(logEntry: LogEntry): LogEntry {
+        logEntry.categories?.let { logEntryCategories ->
+            val filteredCategories = logEntryCategories.filter {
+                availableCategories.contains(it.toViewModel())
+                        || selectedCategories.contains(it.toViewModel())
+            }
+            return logEntry.copy(categories = filteredCategories)
         }
+        return logEntry
     }
 
     private fun filter() {

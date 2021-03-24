@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.telefonica.androidlogger.R
 import com.telefonica.androidlogger.ui.holder.LogListItemHolder
 import com.telefonica.androidlogger.ui.viewmodel.AppLoggerViewModel
+import com.telefonica.androidlogger.ui.viewmodel.LogCategoryViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogEntryViewModel
 import kotlin.math.min
 
@@ -37,19 +38,24 @@ internal class LogListAdapter(
             )
             holder.message.maxLines = if (expanded) Int.MAX_VALUE else DEFAULT_MESSAGE_LINES
             holder.message.setTextColor(priority.color)
-
-            if (categories.isNullOrEmpty()) {
-                holder.indicator.setBackgroundColor(Color.TRANSPARENT)
-            } else {
-                val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, categories.map { it.color }.toIntArray())
-                holder.indicator.background = gradientDrawable
-            }
+            setIndicatorBackground(holder, categories)
             holder.container.setOnClickListener {
                 viewModel.onLogClicked(this)
             }
             holder.container.setOnLongClickListener {
                 copyMessageToClipboard(it.context, message)
                 true
+            }
+        }
+    }
+
+    private fun setIndicatorBackground(holder: LogListItemHolder, categories: List<LogCategoryViewModel>?) {
+        when {
+            categories.isNullOrEmpty() -> holder.indicator.setBackgroundColor(Color.TRANSPARENT)
+            categories.size == 1 -> holder.indicator.setBackgroundColor(categories[0].color)
+            else -> {
+                val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, categories.map { it.color }.toIntArray())
+                holder.indicator.background = gradientDrawable
             }
         }
     }

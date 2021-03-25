@@ -30,7 +30,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         findViewById<Button>(R.id.button_show_logger).setOnClickListener {
-            startActivity(getLaunchIntent(this, emptyList()))
+            startActivity(
+                    getLaunchIntent(this,
+                    listOf(
+                            LoggerConfig.categories[1],
+                            LoggerConfig.categories[0],
+                            LoggerConfig.categories[2])
+                    )
+            )
         }
     }
 

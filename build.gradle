@@ -41,7 +41,7 @@ tasks.detekt.jvmTarget = "1.8"
 allprojects {
 
     group = 'com.telefonica.androidlogger'
-    version = '1.0.0'
+    version = '1.1.0'
 
     repositories {
         google()

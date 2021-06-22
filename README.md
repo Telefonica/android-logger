@@ -14,7 +14,7 @@ Inside the dependency block in the `build.gradle` of your application, add this 
 ```gradle
 dependencies {
     ...
-    implementation 'com.telefonica.androidlogger:$version'
+    implementation 'com.telefonica:androidlogger:$version'
     ...
 }
 ```
@@ -24,8 +24,8 @@ In case you want to disable any logging on release versions (and avoid inclusion
 ```gradle
 dependencies {
     ...
-    debugImplementation 'com.telefonica.androidlogger:$version'
-    releaseImplementation 'com.telefonica.androidlogger-no-op:$version'
+    debugImplementation 'com.telefonica:androidlogger:$version'
+    releaseImplementation 'com.telefonica:androidlogger-no-op:$version'
     ...
 }
 ```

@@ -20,22 +20,8 @@ jobs:
       - run: 'echo -n ${{ github.event.inputs.libraryVersion }} > version.txt'
         shell: bash
 
-      - name: Check permissions
-        id: check
-        uses: scherermichael-oss/action-has-permission@master
-        with:
-          required-permission: admin
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Use the output from the `check` step
-      - name: Check permissions
-        if: "! steps.check.outputs.has-permission"
-        run: exit 1
-
       - name: Increase version
         uses: ./.github/actions/commit_and_push
-        if: steps.check.outputs.has-permission
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: '.'
@@ -47,7 +33,6 @@ jobs:
         run: 'bash ./gradlew clean check assemble'
 
       - name: Create Release in github
-        if: steps.check.outputs.has-permission
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

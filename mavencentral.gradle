@@ -63,7 +63,7 @@ publishing {
                 scm {
                     connection = 'scm:git:github.com/Telefonica/android-logger.git'
                     developerConnection = 'scm:git:ssh://github.com/Telefonica/android-logger.git'
-                    url = 'https://github.com/Telefonica/android-logger/tree/master'
+                    url = 'https://github.com/Telefonica/android-logger/tree/main'
                 }
                 withXml {
                     def dependenciesNode = asNode().appendNode('dependencies')
@@ -105,7 +105,7 @@ publishing {
                 scm {
                     connection = 'scm:git:github.com/Telefonica/android-logger.git'
                     developerConnection = 'scm:git:ssh://github.com/Telefonica/android-logger.git'
-                    url = 'https://github.com/Telefonica/android-logger/tree/master'
+                    url = 'https://github.com/Telefonica/android-logger/tree/main'
                 }
                 withXml {
                     def dependenciesNode = asNode().appendNode('dependencies')

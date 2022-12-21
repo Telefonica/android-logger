@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="GradleDependency" severity="ignore" />
+    <issue id="MergeRootFrame">
+        <ignore path="src/enabled/res/layout/activity_app_logger.xml" />
+    </issue>
+    <issue id="AlwaysShowAction">
+        <ignore path="src/enabled/res/menu/menu_app_logger.xml" />
+    </issue>
+
+
+    <issue id="OldTargetApi" severity="ignore" />
+</lint>

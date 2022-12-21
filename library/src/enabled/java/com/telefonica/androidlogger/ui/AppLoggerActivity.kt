@@ -239,7 +239,7 @@ class AppLoggerActivity : AppCompatActivity() {
     ): Chip =
         LayoutInflater
             .from(context)
-            .inflate(R.layout.log_category_chip, null)
+            .inflate(R.layout.log_category_chip, this, false)
             .let { it as Chip }
             .let {
                 @ColorInt val chipUncheckedBackgroundColor: Int =

@@ -7,10 +7,13 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-    
-    - name: "Lint & Detekt"
-      uses: vgaidarji/android-github-actions-build@v1.0.1
-      with:
-        args: 'bash ./gradlew detekt check'
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run checks
+        if: success() || failure()
+        run: ./gradlew check
+
+      - name: Run Detekt
+        if: success() || failure()
+        run: ./gradlew detekt

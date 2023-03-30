@@ -21,18 +21,6 @@ ext {
     PUBLISH_REPO_URL = 'https://github.com/Telefonica/android-logger'
 }
 
-ext["ossrhUsername"] = ''
-ext["ossrhPassword"] = ''
-File secretPropsFile = project.rootProject.file('local.properties')
-
-if (secretPropsFile.exists()) {
-    Properties p = new Properties()
-    p.load(new FileInputStream(secretPropsFile))
-    p.each { name, value -> ext[name] = value }
-} else {
-    println "File Not found"
-}
-
 publishing {
     publications {
         release(MavenPublication) {
@@ -120,22 +108,12 @@ publishing {
             }
         }
     }
-    repositories {
-        maven {
-            name = "sonatype"
-
-            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-
-            credentials {
-                username ossrhUsername
-                password ossrhPassword
-            }
-        }
-    }
 }
 
 signing {
+    def signingKeyId = findProperty("signingKeyId")
+    def signingKey = findProperty("signingKey")
+    def signingPassword = findProperty("signingPassword")
+    useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
     sign publishing.publications
 }

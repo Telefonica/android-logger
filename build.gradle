@@ -19,13 +19,14 @@ buildscript {
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.15.0")
+    id("io.gitlab.arturbosch.detekt").version("1.22.0")
+    id 'io.github.gradle-nexus.publish-plugin' version '1.3.0' apply false
 }
 
 detekt {
     input = files(rootProject.rootDir)
     config = files("$projectDir/detekt.yml")
-    failFast = true
+    allRules = true
     buildUponDefaultConfig = true
 
     reports {
@@ -48,3 +49,4 @@ allprojects {
         jcenter()
     }
 }
+apply from: "${rootProject.projectDir}/publish_maven_central.gradle"

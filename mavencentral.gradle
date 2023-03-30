@@ -43,14 +43,14 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'dpastor'
-                        name = 'David Pastor Herranz'
-                        email = 'david.pastor.herranz@telefonica.com'
+                        id = 'android-team-telefonica'
+                        name = 'Android Team'
+                        email = 'cto-android@telefonica.com'
                     }
                 }
                 scm {
-                    connection = 'scm:git:github.com/Telefonica/android-logger.git'
-                    developerConnection = 'scm:git:ssh://github.com/Telefonica/android-logger.git'
+                    connection = 'scm:git:https://github.com/Telefonica/android-logger.git'
+                    developerConnection = 'scm:git:ssh://https://github.com/Telefonica/android-logger.git'
                     url = 'https://github.com/Telefonica/android-logger/tree/main'
                 }
                 withXml {
@@ -85,14 +85,14 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = 'dpastor'
-                        name = 'David Pastor Herranz'
-                        email = 'david.pastor.herranz@telefonica.com'
+                        id = 'android-team-telefonica'
+                        name = 'Android Team'
+                        email = 'cto-android@telefonica.com'
                     }
                 }
                 scm {
-                    connection = 'scm:git:github.com/Telefonica/android-logger.git'
-                    developerConnection = 'scm:git:ssh://github.com/Telefonica/android-logger.git'
+                    connection = 'scm:git:https://github.com/Telefonica/android-logger.git'
+                    developerConnection = 'scm:git:ssh://https://github.com/Telefonica/android-logger.git'
                     url = 'https://github.com/Telefonica/android-logger/tree/main'
                 }
                 withXml {

@@ -42,7 +42,11 @@ tasks.detekt.jvmTarget = "1.8"
 allprojects {
 
     group = 'com.telefonica.androidlogger'
-    version = '1.1.0'
+    if (System.getProperty("SNAPSHOT_VERSION") != null) {
+        version = System.getProperty("SNAPSHOT_VERSION")+"-SNAPSHOT"
+    } else {
+        version = System.getProperty("LIBRARY_VERSION") ?: "undefined"
+    }
 
     repositories {
         google()

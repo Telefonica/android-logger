@@ -19,10 +19,18 @@ android {
             dimension "loggerMode"
         }
     }
-    lintOptions {
+    lint {
         warningsAsErrors true
-        lintConfig file("lint-custom.xml")
+        lintConfig file('lint-custom.xml')
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    namespace 'com.telefonica.androidlogger'
 }
 
 dependencies {

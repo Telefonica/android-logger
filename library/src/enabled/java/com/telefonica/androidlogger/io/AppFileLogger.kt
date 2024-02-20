@@ -58,11 +58,23 @@ internal open class AppFileLogger(
             callback = callback
         )
 
-    private fun buildLogReportFile(): File {
-        val outputDir = File(appContext.cacheDir, REPORTS_DIRECTORY).apply { mkdir() }
-        val outputFile =
-            File.createTempFile(TEMPORAL_FILE_PREFIX, TEMPORAL_FILE_EXTENSION, outputDir)
+    fun storeVisibleLogs(visibleLogs: String, callback: TaskCallback<Uri>) {
+        executor.submit(
+            task = {
+                val outputFile = createTempFile()
+                outputFile.writeText(visibleLogs)
+                FileProvider.getUriForFile(
+                    appContext,
+                    appContext.packageName + FILE_PROVIDER_AUTHORITY_SUFFIX,
+                    outputFile
+                )
+            },
+            callback = callback
+        )
+    }
 
+    private fun buildLogReportFile(): File {
+        val outputFile = createTempFile()
         var source: Source? = null
         var sink: BufferedSink? = null
         try {
@@ -75,6 +87,11 @@ internal open class AppFileLogger(
         }
 
         return outputFile
+    }
+
+    private fun createTempFile(): File {
+        val outputDir = File(appContext.cacheDir, REPORTS_DIRECTORY).apply { mkdir() }
+        return File.createTempFile(TEMPORAL_FILE_PREFIX, TEMPORAL_FILE_EXTENSION, outputDir)
     }
 
     private fun buildLogReportStream(): InputStream =

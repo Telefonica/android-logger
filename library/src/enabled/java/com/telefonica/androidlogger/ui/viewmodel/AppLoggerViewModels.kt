@@ -11,6 +11,7 @@ import com.telefonica.androidlogger.domain.LogEntry
 import com.telefonica.androidlogger.domain.getCategories
 import com.telefonica.androidlogger.domain.getLogs
 import com.telefonica.androidlogger.domain.getPersistedLogs
+import com.telefonica.androidlogger.domain.storeVisibleLogs
 import com.telefonica.androidlogger.io.executor.TaskCallback
 import com.telefonica.androidlogger.ui.livedata.filter
 import com.telefonica.androidlogger.ui.livedata.map
@@ -95,6 +96,10 @@ internal class AppLoggerViewModel : ViewModel() {
 
     fun getAllLogs(callback: TaskCallback<Uri>) {
         getPersistedLogs(callback)
+    }
+
+    fun onLogsThatShouldBeStoredIntoAFile(visibleLogs: String, callback: TaskCallback<Uri>) {
+        storeVisibleLogs(visibleLogs, callback)
     }
 
     private fun List<LogEntry>.filterByLogLevel() =

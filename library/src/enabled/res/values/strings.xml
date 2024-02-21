@@ -14,6 +14,7 @@
 	<string name="copy_clipboard_success">Log copied to clipboard!</string>
 
 	<string name="share_all_logs_failure">Something went wrong retrieving persisted logs</string>
+	<string name="share_visible_logs_failure">Something went wrong while sharing visible logs</string>
 
 	<string name="log_level_filter_message">Minimum Log Level</string>
 	<string name="categories_filter_message">Categories</string>

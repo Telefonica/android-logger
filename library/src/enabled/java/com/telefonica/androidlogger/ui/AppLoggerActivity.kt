@@ -39,6 +39,7 @@ import com.telefonica.androidlogger.io.executor.TaskCallback
 import com.telefonica.androidlogger.ui.viewmodel.AppLoggerViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogCategoryViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogPriorityViewModel
+import java.io.File
 import java.security.InvalidParameterException
 
 class AppLoggerActivity : AppCompatActivity() {
@@ -286,12 +287,19 @@ class AppLoggerActivity : AppCompatActivity() {
     }
 
     private fun shareVisibleLogs() {
-        val shareIntent = Intent.createChooser(Intent().apply {
-            action = Intent.ACTION_SEND
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, adapter.getVisibleInfoAsString())
-        }, null)
-        startActivity(shareIntent)
+        val visibleInfoAsString: String = adapter.getVisibleInfoAsString()
+        shareAllLogsCallback = TaskCallback<Uri> { uri ->
+            mainThreadHandler.post {
+                if (uri != null) {
+                    launchShareAllLogsIntent(uri)
+                } else {
+                    Toast.makeText(this, R.string.share_visible_logs_failure, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }.apply {
+            viewModel.onLogsThatShouldBeStoredIntoAFile(visibleInfoAsString, this)
+        }
     }
 
     private fun shareAllLogs() {

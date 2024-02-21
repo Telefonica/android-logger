@@ -58,6 +58,10 @@ internal open class AppLoggerBL(
         fileLogger.getReport(callback)
     }
 
+    fun storeVisibleLogs(visibleLogs: String, callback: TaskCallback<Uri>) {
+        fileLogger.storeVisibleLogs(visibleLogs, callback)
+    }
+
     private fun addLog(logEntry: LogEntry) {
         synchronized(logs) {
             logs.addLast(logEntry)

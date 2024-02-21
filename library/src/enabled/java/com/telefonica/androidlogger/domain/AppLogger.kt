@@ -38,3 +38,7 @@ internal fun getCategories(): List<LogCategory> =
 internal fun getPersistedLogs(callback: TaskCallback<Uri>) {
     appLoggerBLInstance?.getPersistedLogs(callback)
 }
+
+internal fun storeVisibleLogs(visibleLogs: String, callback: TaskCallback<Uri>) {
+    appLoggerBLInstance?.storeVisibleLogs(visibleLogs, callback)
+}

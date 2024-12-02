@@ -32,7 +32,7 @@ detekt {
     }
 }
 
-tasks.detekt.jvmTarget = "11"
+tasks.detekt.jvmTarget = "17"
 
 allprojects {
 

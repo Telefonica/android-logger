@@ -1,9 +1,15 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins{
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.com.android.library
+}
 
 android {
-    compileSdk 33
+    compileSdk 34
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 34
+    }
 
     flavorDimensions "loggerMode"
     productFlavors {

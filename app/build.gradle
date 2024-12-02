@@ -1,16 +1,15 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
+    alias libs.plugins.com.android.application
+    alias libs.plugins.kotlin.android
 }
 
 android {
-    compileSdkVersion 33
-    //noinspection GradleDependency
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.telefonica.androidlogger.app"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0.0"
 

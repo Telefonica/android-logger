@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
         findViewById<Button>(R.id.button_add_logs).setOnClickListener {
-            (1..NUMBER_OF_LOGS_TO_ADD).forEach {
+            repeat(NUMBER_OF_LOGS_TO_ADD) {
                 log(
                     getRandomLogPriority(),
                     getRandomLogTag(),

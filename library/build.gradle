@@ -1,13 +1,14 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins{
+    alias libs.plugins.kotlin.android
+    alias libs.plugins.com.android.library
+}
 
 android {
-    compileSdkVersion 33
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
     }
 
     flavorDimensions "loggerMode"
@@ -24,25 +25,25 @@ android {
         lintConfig file('lint-custom.xml')
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
     namespace 'com.telefonica.androidlogger'
 }
 
 dependencies {
     //noinspection GradleDependency
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.annotation:annotation:1.1.0"
-    enabledImplementation "com.google.android.material:material:$support_version"
-    enabledImplementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    enabledImplementation "com.elvishew:xlog:1.11.0"
-    enabledImplementation "com.squareup.okio:okio:2.7.0"
+    implementation libs.org.jetbrains.kotlin
+    implementation libs.androidx.annotation
+    enabledImplementation libs.com.google.android.material
+    enabledImplementation libs.androidx.lifecycle.extensions
+    enabledImplementation libs.elvishew.xlog
+    enabledImplementation libs.com.squareup.okio
 
-    testImplementation 'junit:junit:4.13'
+    testImplementation libs.junit
 }
 
 apply from: "${rootProject.projectDir}/mavencentral.gradle"

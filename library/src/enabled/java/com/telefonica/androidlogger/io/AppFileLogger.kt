@@ -6,8 +6,10 @@ import android.util.Log
 import androidx.core.content.FileProvider
 import com.elvishew.xlog.XLog
 import com.elvishew.xlog.flattener.ClassicFlattener
+import com.elvishew.xlog.flattener.Flattener2
 import com.elvishew.xlog.printer.file.FilePrinter
-import com.elvishew.xlog.printer.file.backup.FileSizeBackupStrategy
+import com.elvishew.xlog.printer.file.backup.BackupStrategy2.NO_LIMIT
+import com.elvishew.xlog.printer.file.backup.FileSizeBackupStrategy2
 import com.elvishew.xlog.printer.file.naming.ChangelessFileNameGenerator
 import com.telefonica.androidlogger.domain.LogPriority
 import com.telefonica.androidlogger.io.executor.Executor
@@ -33,8 +35,8 @@ internal open class AppFileLogger(
     open fun init() {
         logPrinter = FilePrinter.Builder(appContext.cacheDir.path)
             .fileNameGenerator(ChangelessFileNameGenerator(PERSISTED_LOGS_FILE_NAME))
-            .backupStrategy(FileSizeBackupStrategy(MAX_PERSISTED_LOGS_FILE_SIZE_BYTES))
-            .logFlattener(ClassicFlattener())
+            .backupStrategy(FileSizeBackupStrategy2(MAX_PERSISTED_LOGS_FILE_SIZE_BYTES, NO_LIMIT))
+            .flattener(ClassicFlattener())
             .build()
             .apply {
                 XLog.init(this)

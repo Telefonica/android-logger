@@ -16,7 +16,7 @@ jobs:
           java-version: '17'
           
       - name: Build library
-        run: 'bash ./gradlew clean :library:assembleRelease :library:signReleasePublication :library:signNoopPublication'
+        run: 'bash ./gradlew clean :library:assembleRelease'
           
       - name: Release library
         env:
@@ -25,5 +25,5 @@ jobs:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGPASSWORD }}
           ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEYID }}
-        run: "bash ./gradlew publishReleasePublicationToSonatypeRepository -DSNAPSHOT_VERSION=${{ github.event.release.tag_name }} publishNoopPublicationToSonatypeRepository -DLIBRARY_VERSION=${{ github.event.release.tag_name }}
+        run: "bash ./gradlew :library:signReleasePublication :library:signNoopPublication publishReleasePublicationToSonatypeRepository -DSNAPSHOT_VERSION=${{ github.event.release.tag_name }} publishNoopPublicationToSonatypeRepository -DLIBRARY_VERSION=${{ github.event.release.tag_name }}
         --max-workers 1 closeAndReleaseStagingRepositories"

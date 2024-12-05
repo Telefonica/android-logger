@@ -115,7 +115,7 @@ internal class AppLoggerViewModel : ViewModel() {
         } ?: this
 
     private fun String.lowerCaseContains(anotherString: String) =
-        toLowerCase(Locale.ROOT).contains(anotherString.toLowerCase(Locale.ROOT))
+        lowercase(Locale.ROOT).contains(anotherString.lowercase(Locale.ROOT))
 
     private fun List<LogEntry>.filterBySelectedCategories(): List<LogEntry> {
         val isEmptyCategoriesSelection = selectedCategories.isEmpty()

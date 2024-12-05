@@ -11,35 +11,32 @@ import android.os.Handler
 import android.os.Looper
 import android.util.TypedValue
 import android.view.LayoutInflater
-import android.view.View
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-
 import com.telefonica.androidlogger.R
-import com.telefonica.androidlogger.ui.adapter.LogListAdapter
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.telefonica.androidlogger.domain.LogCategory
 import com.telefonica.androidlogger.io.executor.TaskCallback
+import com.telefonica.androidlogger.ui.adapter.LogListAdapter
 import com.telefonica.androidlogger.ui.viewmodel.AppLoggerViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogCategoryViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogPriorityViewModel
-import java.io.File
 import java.security.InvalidParameterException
 
 class AppLoggerActivity : AppCompatActivity() {
@@ -62,7 +59,7 @@ class AppLoggerActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_app_logger)
 
-        viewModel = ViewModelProviders.of(this)
+        viewModel = ViewModelProvider(this)
             .get(AppLoggerViewModel::class.java)
             .apply {
                 init(intent.getStringArrayListExtra(EXTRA_CATEGORIES_NAMES) ?: emptyList())

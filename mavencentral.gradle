@@ -117,3 +117,11 @@ signing {
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
     sign publishing.publications
 }
+
+tasks.named('publishReleasePublicationToSonatypeRepository') { task ->
+    task.dependsOn ':library:signNoopPublication'
+}
+
+tasks.named('publishNoopPublicationToSonatypeRepository') { task ->
+    task.dependsOn ':library:signReleasePublication'
+}

@@ -2,7 +2,6 @@
 buildscript {
     repositories {
         google()
-        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
@@ -45,7 +44,6 @@ allprojects {
 
     repositories {
         google()
-        jcenter()
     }
 }
 apply from: "${rootProject.projectDir}/publish_maven_central.gradle"

@@ -32,6 +32,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.telefonica.androidlogger.R
 import com.telefonica.androidlogger.domain.LogCategory
+import com.telefonica.androidlogger.domain.arePersistedLogsEnabled
 import com.telefonica.androidlogger.io.executor.TaskCallback
 import com.telefonica.androidlogger.ui.adapter.LogListAdapter
 import com.telefonica.androidlogger.ui.viewmodel.AppLoggerViewModel
@@ -79,7 +80,9 @@ class AppLoggerActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_app_logger, menu)
-
+        if (!arePersistedLogsEnabled()) {
+            menu.removeItem(R.id.action_share_all)
+        }
         searchView = (menu.findItem(R.id.action_search).actionView as SearchView).apply {
             val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
             setSearchableInfo(searchManager.getSearchableInfo(componentName))

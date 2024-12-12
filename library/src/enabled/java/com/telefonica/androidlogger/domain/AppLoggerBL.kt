@@ -54,6 +54,9 @@ internal open class AppLoggerBL(
     open fun getLogs(): LiveData<List<LogEntry>> =
             logsData
 
+    open fun arePersistedLogsEnabled(): Boolean =
+        fileLogger != null
+
     open fun getPersistedLogs(callback: TaskCallback<Uri>) {
         fileLogger?.getReport(callback)
     }

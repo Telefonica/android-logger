@@ -41,6 +41,9 @@ internal fun getLogs(): LiveData<List<LogEntry>> =
 internal fun getCategories(): List<LogCategory> =
     appLoggerBLInstance?.categories ?: emptyList()
 
+internal fun arePersistedLogsEnabled() : Boolean =
+    appLoggerBLInstance?.arePersistedLogsEnabled() ?: false
+
 internal fun getPersistedLogs(callback: TaskCallback<Uri>) {
     appLoggerBLInstance?.getPersistedLogs(callback)
 }

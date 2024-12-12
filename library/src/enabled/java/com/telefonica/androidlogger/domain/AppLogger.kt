@@ -13,11 +13,17 @@ import java.util.concurrent.Executors
 internal var appLoggerBLInstance: AppLoggerBL? = null
 
 @JvmOverloads
-fun initAppLogger(context: Context, logCategories: List<LogCategory> = emptyList()) {
+fun initAppLogger(
+    context: Context,
+    logCategories: List<LogCategory> = emptyList(),
+    logToDisk: Boolean = true
+) {
     appLoggerBLInstance = AppLoggerBL(
-        fileLogger = AppFileLogger(
-            appContext = context,
-            executor = Executor(Executors.newSingleThreadExecutor())),
+        fileLogger = if (logToDisk) {
+            AppFileLogger(context,Executor(Executors.newSingleThreadExecutor()))
+        } else {
+            null
+        },
         consoleLogger = AppConsoleLogger()
     ).apply {
         init(context, logCategories)

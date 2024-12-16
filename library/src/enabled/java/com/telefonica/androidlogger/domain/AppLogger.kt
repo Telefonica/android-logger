@@ -13,11 +13,17 @@ import java.util.concurrent.Executors
 internal var appLoggerBLInstance: AppLoggerBL? = null
 
 @JvmOverloads
-fun initAppLogger(context: Context, logCategories: List<LogCategory> = emptyList()) {
+fun initAppLogger(
+    context: Context,
+    logCategories: List<LogCategory> = emptyList(),
+    logToDisk: Boolean = true
+) {
     appLoggerBLInstance = AppLoggerBL(
-        fileLogger = AppFileLogger(
-            appContext = context,
-            executor = Executor(Executors.newSingleThreadExecutor())),
+        fileLogger = if (logToDisk) {
+            AppFileLogger(context,Executor(Executors.newSingleThreadExecutor()))
+        } else {
+            null
+        },
         consoleLogger = AppConsoleLogger()
     ).apply {
         init(context, logCategories)
@@ -34,6 +40,9 @@ internal fun getLogs(): LiveData<List<LogEntry>> =
 
 internal fun getCategories(): List<LogCategory> =
     appLoggerBLInstance?.categories ?: emptyList()
+
+internal fun arePersistedLogsEnabled() : Boolean =
+    appLoggerBLInstance?.arePersistedLogsEnabled() ?: false
 
 internal fun getPersistedLogs(callback: TaskCallback<Uri>) {
     appLoggerBLInstance?.getPersistedLogs(callback)

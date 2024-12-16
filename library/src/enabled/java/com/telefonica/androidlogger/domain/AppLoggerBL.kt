@@ -12,7 +12,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 internal open class AppLoggerBL(
-        private val fileLogger: AppFileLogger,
+        private val fileLogger: AppFileLogger?,
         private val consoleLogger: AppConsoleLogger
 ) {
     private val logs: LinkedList<LogEntry> = LinkedList()
@@ -32,7 +32,7 @@ internal open class AppLoggerBL(
                     }
                 }.groupBy({ it.first }, { it.second })
         logsData.value = emptyList()
-        fileLogger.init()
+        fileLogger?.init()
     }
 
     open fun log(@LogPriority priority: Int, tag: String, message: String, throwable: Throwable?) {
@@ -47,19 +47,22 @@ internal open class AppLoggerBL(
                         message = messageToLog
                 )
         )
-        fileLogger.log(priority, tag, messageToLog)
+        fileLogger?.log(priority, tag, messageToLog)
         consoleLogger.log(priority, tag, messageToLog)
     }
 
     open fun getLogs(): LiveData<List<LogEntry>> =
             logsData
 
+    open fun arePersistedLogsEnabled(): Boolean =
+        fileLogger != null
+
     open fun getPersistedLogs(callback: TaskCallback<Uri>) {
-        fileLogger.getReport(callback)
+        fileLogger?.getReport(callback)
     }
 
     fun storeVisibleLogs(visibleLogs: String, callback: TaskCallback<Uri>) {
-        fileLogger.storeVisibleLogs(visibleLogs, callback)
+        fileLogger?.storeVisibleLogs(visibleLogs, callback)
     }
 
     private fun addLog(logEntry: LogEntry) {

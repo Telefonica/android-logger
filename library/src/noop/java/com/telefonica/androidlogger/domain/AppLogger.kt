@@ -4,9 +4,11 @@ import android.content.Context
 
 @Suppress("UNUSED_PARAMETER")
 @JvmOverloads
-fun initAppLogger(context: Context, logCategories: List<LogCategory> = emptyList()) {
-
-}
+fun initAppLogger(
+    context: Context,
+    logCategories: List<LogCategory> = emptyList(),
+    logToDisk: Boolean = true
+) {}
 
 @Suppress("UNUSED_PARAMETER")
 @JvmOverloads

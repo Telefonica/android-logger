@@ -8,7 +8,9 @@ fun initAppLogger(
     context: Context,
     logCategories: List<LogCategory> = emptyList(),
     logToDisk: Boolean = true
-) {}
+) {
+    /* Do nothing */
+}
 
 @Suppress("UNUSED_PARAMETER")
 @JvmOverloads

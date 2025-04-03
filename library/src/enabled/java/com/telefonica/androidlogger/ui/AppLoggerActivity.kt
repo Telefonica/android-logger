@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,7 +45,6 @@ import com.telefonica.androidlogger.ui.viewmodel.AppLoggerViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogCategoryViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogPriorityViewModel
 import java.security.InvalidParameterException
-import androidx.core.view.isVisible
 
 class AppLoggerActivity : AppCompatActivity() {
 
@@ -79,6 +79,8 @@ class AppLoggerActivity : AppCompatActivity() {
         initToolbar()
         initLogsList()
         initFiltersView()
+        setOnBackPressed()
+        setWindowsInsets()
 
         viewModel.getFilteredLogs().observe(this@AppLoggerActivity, Observer {
             adapter.onDataModified(it)
@@ -87,7 +89,6 @@ class AppLoggerActivity : AppCompatActivity() {
             }
         })
 
-        setWindowsInsets()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -141,15 +142,18 @@ class AppLoggerActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
-    override fun onBackPressed() {
-        searchView?.let {
-            if (!it.isIconified) {
-                it.isIconified = true
-                return
+    private fun setOnBackPressed() {
+        onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                searchView?.let {
+                    if (!it.isIconified) {
+                        it.isIconified = true
+                        return
+                    }
+                }
+                finish()
             }
-        }
-        super.onBackPressed()
+        })
     }
 
     override fun onDestroy() {

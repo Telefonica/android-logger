@@ -4,11 +4,11 @@ plugins{
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 35
     }
 
     flavorDimensions "loggerMode"
@@ -37,6 +37,7 @@ android {
 dependencies {
     //noinspection GradleDependency
     implementation libs.org.jetbrains.kotlin
+    implementation libs.androidx.activity
     implementation libs.androidx.annotation
     enabledImplementation libs.com.google.android.material
     enabledImplementation libs.androidx.lifecycle.extensions

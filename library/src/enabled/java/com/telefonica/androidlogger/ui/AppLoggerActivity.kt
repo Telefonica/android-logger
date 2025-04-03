@@ -18,10 +18,15 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -39,6 +44,7 @@ import com.telefonica.androidlogger.ui.viewmodel.AppLoggerViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogCategoryViewModel
 import com.telefonica.androidlogger.ui.viewmodel.LogPriorityViewModel
 import java.security.InvalidParameterException
+import androidx.core.view.isVisible
 
 class AppLoggerActivity : AppCompatActivity() {
 
@@ -56,6 +62,10 @@ class AppLoggerActivity : AppCompatActivity() {
     private var shareAllLogsCallback: TaskCallback<Uri>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+        )
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_app_logger)
@@ -76,6 +86,8 @@ class AppLoggerActivity : AppCompatActivity() {
                 recyclerView.post { scrollToBottom() }
             }
         })
+
+        setWindowsInsets()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -129,6 +141,7 @@ class AppLoggerActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
+    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
     override fun onBackPressed() {
         searchView?.let {
             if (!it.isIconified) {
@@ -275,7 +288,7 @@ class AppLoggerActivity : AppCompatActivity() {
     }
 
     private fun toggleCategoryFilter() {
-        if (filtersView.visibility == View.VISIBLE) {
+        if (filtersView.isVisible) {
             filtersView.visibility = View.GONE
         } else {
             filtersView.visibility = View.VISIBLE
@@ -325,7 +338,24 @@ class AppLoggerActivity : AppCompatActivity() {
         }, null)
         startActivity(shareIntent)
     }
+
+    private fun setWindowsInsets() {
+        setOnApplyWindowInsetsListener(recyclerView) { v, windowInsets ->
+            val bars = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
+            v.updatePadding(
+                top = v.paddingTop,
+                left = bars.left,
+                right = bars.right,
+                bottom = bars.bottom,
+            )
+            WindowInsetsCompat.CONSUMED
+        }
+    }
 }
+
 
 private const val EXTRA_CATEGORIES_NAMES = "extra_categories_names"
 

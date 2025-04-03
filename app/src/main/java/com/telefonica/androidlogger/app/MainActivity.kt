@@ -3,6 +3,7 @@ package com.telefonica.androidlogger.app
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.telefonica.androidlogger.domain.LogPriority
 import com.telefonica.androidlogger.domain.log
@@ -13,6 +14,7 @@ import kotlin.random.nextInt
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()

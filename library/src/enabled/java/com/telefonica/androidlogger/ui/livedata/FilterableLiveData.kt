@@ -4,7 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 
 internal class FilterableLiveData<T>(
     source: LiveData<T>,
@@ -62,5 +62,4 @@ internal fun <T> LiveData<T>.throttle(duration: Long = 1000L): LiveData<T> = Med
     }
 }
 
-internal fun <From, To> LiveData<From>.map(mapFunc: (From) -> To): LiveData<To> =
-    Transformations.map(this, mapFunc)
+internal fun <From, To> LiveData<From>.map(mapFunc: (From) -> To): LiveData<To> = map(mapFunc)

@@ -18,10 +18,16 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -56,6 +62,10 @@ class AppLoggerActivity : AppCompatActivity() {
     private var shareAllLogsCallback: TaskCallback<Uri>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+        )
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_app_logger)
@@ -69,6 +79,8 @@ class AppLoggerActivity : AppCompatActivity() {
         initToolbar()
         initLogsList()
         initFiltersView()
+        setOnBackPressed()
+        setWindowsInsets()
 
         viewModel.getFilteredLogs().observe(this@AppLoggerActivity, Observer {
             adapter.onDataModified(it)
@@ -76,6 +88,7 @@ class AppLoggerActivity : AppCompatActivity() {
                 recyclerView.post { scrollToBottom() }
             }
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -129,14 +142,18 @@ class AppLoggerActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    override fun onBackPressed() {
-        searchView?.let {
-            if (!it.isIconified) {
-                it.isIconified = true
-                return
+    private fun setOnBackPressed() {
+        onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                searchView?.let {
+                    if (!it.isIconified) {
+                        it.isIconified = true
+                        return
+                    }
+                }
+                finish()
             }
-        }
-        super.onBackPressed()
+        })
     }
 
     override fun onDestroy() {
@@ -275,7 +292,7 @@ class AppLoggerActivity : AppCompatActivity() {
     }
 
     private fun toggleCategoryFilter() {
-        if (filtersView.visibility == View.VISIBLE) {
+        if (filtersView.isVisible) {
             filtersView.visibility = View.GONE
         } else {
             filtersView.visibility = View.VISIBLE
@@ -325,7 +342,24 @@ class AppLoggerActivity : AppCompatActivity() {
         }, null)
         startActivity(shareIntent)
     }
+
+    private fun setWindowsInsets() {
+        setOnApplyWindowInsetsListener(recyclerView) { v, windowInsets ->
+            val bars = windowInsets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
+            v.updatePadding(
+                top = v.paddingTop,
+                left = bars.left,
+                right = bars.right,
+                bottom = bars.bottom,
+            )
+            WindowInsetsCompat.CONSUMED
+        }
+    }
 }
+
 
 private const val EXTRA_CATEGORIES_NAMES = "extra_categories_names"
 

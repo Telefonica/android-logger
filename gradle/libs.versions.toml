@@ -2,7 +2,7 @@
 activity = "1.10.1"
 android-gradle-plugin = "8.7.3"
 junit = "4.13.2"
-kotlin = "2.1.10"
+kotlin = "2.0.21"
 androidx-lifecycle = "2.2.0"
 material = "1.12.0"
 elviswhew-xlog = "1.11.1"

@@ -1,7 +1,10 @@
 name: "Snapshot"
 on:
-  push:
   workflow_dispatch:
+    inputs:
+      snapshotVersion:
+        description: "Snapshot version"
+        required: true
 
 jobs:
   release:
@@ -25,5 +28,5 @@ jobs:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGPASSWORD }}
           ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEYID }}
-        run: "bash ./gradlew publishReleasePublicationToSonatypeRepository -DSNAPSHOT_VERSION=1.0.0 publishNoopPublicationToSonatypeRepository -DSNAPSHOT_VERSION=1.0.0
+        run: "bash ./gradlew publishReleasePublicationToSonatypeRepository -DSNAPSHOT_VERSION=${{ github.event.inputs.snapshotVersion }} publishNoopPublicationToSonatypeRepository -DSNAPSHOT_VERSION=${{ github.event.inputs.snapshotVersion }}
         --max-workers 1 closeAndReleaseStagingRepositories"

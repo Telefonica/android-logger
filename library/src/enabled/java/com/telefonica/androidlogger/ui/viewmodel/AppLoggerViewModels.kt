@@ -18,6 +18,7 @@ import com.telefonica.androidlogger.ui.livedata.map
 import com.telefonica.androidlogger.ui.livedata.throttle
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.graphics.toColorInt
 
 internal class AppLoggerViewModel : ViewModel() {
 
@@ -168,10 +169,10 @@ internal enum class LogPriorityViewModel(
     val displayName: String,
     @ColorInt val color: Int
 ) {
-    VERBOSE("Verbose", Color.parseColor("#6C757D")),
-    DEBUG("Debug", Color.parseColor("#000000")),
-    INFO("Info", Color.parseColor("#007BFF")),
-    WARN("Warn", Color.parseColor("#FFC107")),
-    ERROR("Error", Color.parseColor("#DC3545")),
-    ASSERT("Assert", Color.parseColor("#E83E8C"))
+    VERBOSE("Verbose", "#6C757D".toColorInt()),
+    DEBUG("Debug", "#000000".toColorInt()),
+    INFO("Info", "#007BFF".toColorInt()),
+    WARN("Warn", "#FFC107".toColorInt()),
+    ERROR("Error", "#DC3545".toColorInt()),
+    ASSERT("Assert", "#E83E8C".toColorInt())
 }

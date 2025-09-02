@@ -1,17 +1,17 @@
 [versions]
 activity = "1.10.1"
-android-gradle-plugin = "8.7.3"
+android-gradle-plugin = "8.11.1"
 junit = "4.13.2"
-kotlin = "2.0.21"
+kotlin = "2.1.20"
 androidx-lifecycle = "2.2.0"
 material = "1.12.0"
 elviswhew-xlog = "1.11.1"
-okio = "3.9.1"
+okio = "3.16.0"
 
 [libraries]
 androidx-activity = { module = "androidx.activity:activity", version.ref = "activity" }
 androidx-annotation = { module = "androidx.annotation:annotation", version = "1.9.1" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.7.0" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.7.1" }
 androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidx-lifecycle" }
 com-google-android-material = { module = "com.google.android.material:material", version.ref = "material" }
 com-squareup-okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
@@ -23,5 +23,5 @@ elvishew-xlog = { module = "com.elvishew:xlog", version.ref = "elviswhew-xlog" }
 com-android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 com-android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-gitlab-arturbosch-detekt = "io.gitlab.arturbosch.detekt:1.23.7"
+gitlab-arturbosch-detekt = "io.gitlab.arturbosch.detekt:1.23.8"
 github-gradle-publish-plugin = { id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0" }

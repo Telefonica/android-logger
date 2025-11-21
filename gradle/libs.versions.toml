@@ -1,6 +1,6 @@
 [versions]
 activity = "1.10.1"
-android-gradle-plugin = "8.11.1"
+android-gradle-plugin = "8.13.1"
 junit = "4.13.2"
 kotlin = "2.1.20"
 androidx-lifecycle = "2.2.0"
